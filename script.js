@@ -56,23 +56,32 @@
   });
 
   /* ---------- 3. Reveal on scroll ------------------------------------ */
-  const revealables = document.querySelectorAll('.reveal');
+  const revealables = [...document.querySelectorAll('.reveal')];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      && 'IntersectionObserver' in window) {
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealables.forEach(el => el.classList.add('in'));
+  } else {
+    // Whatever is already on screen shows immediately — the top of the page
+    // should never animate itself in while someone waits for it.
+    const onScreenNow = revealables.filter(
+      el => el.getBoundingClientRect().top < window.innerHeight
+    );
+    onScreenNow.forEach(el => el.classList.add('in'));
 
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach((entry, i) => {
         if (!entry.isIntersecting) return;
-        // Slight stagger so grouped items don't all pop at once.
-        setTimeout(() => entry.target.classList.add('in'), i * 70);
+        // Small stagger so a row of cards doesn't pop all at once,
+        // capped so a long run never drags.
+        setTimeout(() => entry.target.classList.add('in'), Math.min(i, 5) * 60);
         obs.unobserve(entry.target);
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
 
-    revealables.forEach(el => io.observe(el));
-  } else {
-    revealables.forEach(el => el.classList.add('in'));
+    revealables
+      .filter(el => !el.classList.contains('in'))
+      .forEach(el => io.observe(el));
   }
 
   /* ---------- 4. Active nav link + header shadow --------------------- */

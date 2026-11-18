@@ -451,13 +451,14 @@ a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset:
 .site-footer p { margin: 0; }
 .site-footer a { color: var(--text-soft); }
 
-/* ---------- Scroll reveal ---------- */
-.reveal {
+/* ---------- Scroll reveal ----------
+   Hidden only when JS is running to un-hide it. No JS, no blank page.  */
+.js .reveal {
   opacity: 0;
   transform: translateY(14px);
-  transition: opacity .6s var(--ease), transform .6s var(--ease);
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
 }
-.reveal.in { opacity: 1; transform: none; }
+.js .reveal.in { opacity: 1; transform: none; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 760px) {

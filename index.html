@@ -12,6 +12,10 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://syafizamirul.github.io">
 
+<!-- Marks that JS is alive, so the CSS only hides content it can bring back.
+     Inline and first, so it runs before anything paints. -->
+<script>document.documentElement.classList.add('js');</script>
+
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
 </head>
@@ -50,7 +54,7 @@
   <!-- ───────────────────────── Hero ───────────────────────── -->
   <section class="hero" id="top">
     <div class="wrap">
-      <p class="eyebrow reveal">Kuala Lumpur <span class="ph">[ your location ]</span></p>
+      <p class="eyebrow reveal"><span class="ph">[ your city ]</span></p>
 
       <h1 class="reveal">
         Syafiz Amirul
