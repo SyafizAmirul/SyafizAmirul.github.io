@@ -30,6 +30,13 @@ The page ships with bracketed placeholders wrapped in `<span class="ph">`.
 Replace that text with your own, then delete the `.ph` block in `styles.css`
 to remove the highlighting.
 
+## Before you call it done
+
+1. Replace the bracketed placeholder copy in `index.html`.
+2. Delete the `.ph` block in `styles.css` (removes the highlight boxes).
+3. Delete the `<meta name="robots" content="noindex, nofollow">` line in
+   `index.html` — until it's gone, search engines are told to skip the site.
+
 ## Publishing
 
 Pushed to `main`, GitHub Pages serves it automatically once enabled under
